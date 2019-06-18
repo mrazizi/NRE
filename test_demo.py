@@ -4,6 +4,7 @@ import tensorflow as tf
 import sys
 import os
 import json
+import ujson
 
 dataset_name = 'nyt'
 if len(sys.argv) > 1:
@@ -98,8 +99,8 @@ if len(sys.argv) > 3:
 
 auc, pred_result = framework.test(model, ckpt="./checkpoint/" + dataset_name + "_" + model.encoder + "_" + model.selector, return_result=True)
 
-pred_result = pred_result.decode('utf-8')
+# pred_result = pred_result.decode('utf-8')
 
 with open('./test_result/' + dataset_name + "_" + model.encoder + "_" + model.selector + "_pred.json", 'w') as outfile:
-    json.dump(pred_result, outfile)
+    ujson.dump(pred_result, outfile)
 
